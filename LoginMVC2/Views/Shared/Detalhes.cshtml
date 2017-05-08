@@ -1,0 +1,36 @@
+﻿@model LoginMVC2.Models.Produtos
+
+<fieldset>
+    <legend>Produtos</legend>
+
+    <div class="display-label">
+        <strong>@Html.DisplayNameFor(model => model.Nome)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <br />
+    <div class="display-label">
+        <strong>@Html.DisplayNameFor(model => model.Preco)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Preco)
+    </div>
+
+    <br />
+    <div class="display-label">
+        <strong>@Html.DisplayNameFor(model => model.Quantidade)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quantidade)
+    </div>
+
+    <br />
+    <div class="display-label">
+        <strong>@Html.DisplayNameFor(model => model.DataCadastro)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataCadastro)
+    </div>
+</fieldset>

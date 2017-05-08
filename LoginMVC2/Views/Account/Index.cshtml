@@ -1,0 +1,67 @@
+﻿@model LoginMVC2.Models.USUARIOS
+
+@{
+    ViewBag.Title = "LogOn";
+}
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var ruleSet_default = {
+            required: true,
+            minlength: 6
+        };
+        $('form').validate({
+            // errorClass: "error-message",
+            rules: {
+                UserName: ruleSet_default,
+                Senha: ruleSet_default
+            }
+        })
+
+        $('#UserName, #Senha').attr('maxlength', 50);
+    </script>
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h2>Área administrativa</h2>
+            <p>@ViewBag.CriouUsuario</p>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>LogOn</legend>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UserName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.UserName)
+                        @Html.ValidationMessageFor(model => model.UserName, String.Empty, new { @class = "error-message" })
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Senha)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Senha)
+                        @Html.ValidationMessageFor(model => model.Senha, String.Empty, new { @class = "error-message" })
+                    </div>
+                    <input id="RememberMe" name="RememberMe" value="false" type="checkbox" /><span> Lembrar</span>
+                    <br />
+                    <br />
+                    <p>
+                        <input class="btn btn-lg btn-primary" type="submit" value="Login" />
+                    </p>
+                    <br />
+                    <p>Não é cadastrado? @Html.ActionLink("Registre-se", "Register", "Account")</p>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

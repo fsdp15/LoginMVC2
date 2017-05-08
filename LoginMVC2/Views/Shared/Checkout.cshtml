@@ -1,0 +1,40 @@
+﻿@model LoginMVC2.Models.Enderecos_Lista
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Checkout</legend>
+
+        <div class="display-label">
+            <strong>Dados de entrega: </strong>
+        </div>
+        <br />
+        <div>
+            @Html.DropDownListFor(model => model.EnderecoSelecionado, new SelectList(Model.ListaEnderecos.Where(e => e.Cliente ==  ViewBag.IDUsuario), "IDEndereco", "Endereco" ), "--Selecionar--")
+        </div>
+        <br />
+        <a class='btn btn-info btn-xs' href="@Url.Action("Endereco")"><span class="glyphicon glyphicon-edit"></span>Cadastrar</a>
+        <div id="divCadastro"></div>
+        <br />
+        <br />
+    </fieldset>
+
+    <fieldset>
+        <legend>Pagamento</legend>
+        <p>Promoção especial! Todas suas compras serão gratuitas caso insira o código "FREE"</p>
+
+        <div class="display-label">
+            <strong>Código promocional: </strong>
+        </div>
+        <div class="display-field">
+            @Html.TextBox("codPromocional")
+        </div>
+        <br />
+        <p>
+            <input class="btn btn-lg btn-success" id="botaoSubmit" type="submit" value="Finalizar" />
+        </p>
+    </fieldset>
+}
+

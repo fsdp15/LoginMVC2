@@ -1,0 +1,78 @@
+﻿@model IEnumerable<LoginMVC2.Models.Carrinho>
+
+    @{
+        ViewBag.Title = "Carrinho";
+    }
+
+    @section scripts{
+       @Scripts.Render("~/bundles/carrinho")
+    }
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2>Carrinho de compras</h2>
+                    <br />
+                </div>
+                <div class="container">
+                    <div class="row col-md-8 col-md-offset-2 custyle">
+
+                        <table id="tableCarrinho" class="table table-striped custab" style="margin-left: -2%;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Produto)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Quantidade)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DataCriacao)
+                                    </th>
+                                    <th class="text-center">Preço</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Produtos.Nome)
+                                    </td>
+                                    <td id="tdQuantidade" class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Quantidade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DataCriacao)
+                                    </td>
+                                    <td class="tetx-center">
+                                        R$ <div style="display:inline-block;" id="tdPreco">@((item.Produtos.Preco * (double)item.Quantidade).ToString("F"))</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class='btn btn-danger btn-xs' id="" href="@Url.Action("Remover", new { IDProduto = item.Produto })"><span class="glyphicon glyphicon-remove"></span>Remover</a>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"><strong>Preço total:</strong> R$ <div style="display:inline-block;" id="tdPrecoTotal">@((ViewBag.Preco).ToString("F"))</div></td>
+                                    <td><a class='btn btn-success' href="@Url.Action("Checkout")"><span class="glyphicon glyphicon-shopping-cart"></span>Checkout</a></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p></p>
+        </div>
+    </div>

@@ -1,0 +1,97 @@
+﻿@model LoginMVC2.Models.Register
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var ruleSet_default = {
+            required: true,
+            minlength: 6
+        };
+        var ruleSet_1 = {
+            equalTo: Senha
+        }
+        var ruleSet_2 = {
+            email: true
+        }
+        $.extend(ruleSet_1, ruleSet_default);
+        $.extend(ruleSet_2, ruleSet_default);
+        $('form').validate({
+            // errorClass: "error-message",
+            rules: {
+                UserName: ruleSet_default,
+                Senha: ruleSet_default,
+                ConfirmarSenha: ruleSet_1,
+                EmailUsuario: ruleSet_2
+            }
+        });
+
+        $('#UserName, #Senha, #ConfirmarSenha, #EmailUsuario').attr('maxlength', 50);
+    </script>
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Registrar</legend>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UserName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.UserName)
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Senha)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Senha)
+                        @Html.ValidationMessageFor(model => model.Senha)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ConfirmarSenha)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ConfirmarSenha)
+                        @Html.ValidationMessageFor(model => model.ConfirmarSenha)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmailUsuario)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmailUsuario)
+                        @Html.ValidationMessageFor(model => model.EmailUsuario)
+                    </div>
+                    <br />
+
+                    <p>
+                        <input class="btn btn-lg btn-success" type="submit" value="Confirmar" />
+                    </p>
+                </fieldset>
+            }
+            <br />
+            <br />
+
+
+            <div>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-primary" style="margin-left:45%;"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+            </div>
+
+        </div>
+    </div>
+</div>

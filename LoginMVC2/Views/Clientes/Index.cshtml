@@ -1,0 +1,81 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<LoginMVC2.Models.Produtos>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Clientes";
+    }
+
+    @section scripts{
+        @Scripts.Render("~/bundles/clienteindex")
+    }
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2>Bem-vindo!</h2>
+                    <br />
+                </div>
+                <br />
+                <div class="container">
+                    <div class="row col-md-8 col-md-offset-2 custyle">
+                        <table id="tabelaProdutos" class="table table-striped custab" style="margin-left: -2%;">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" style="padding-bottom:3px;">
+                                        <div class="col-sm-9" style="padding-left: 0px;">
+                                            @using (Html.BeginForm("Index", "Clientes", FormMethod.Get))
+                                            {
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="SearchString" name="SearchString" placeholder="Filtrar por nome...">
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="btn btn-default">
+                                                            <span class="glyphicon glyphicon-search"></span> Pesquisar
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                                    </th>
+                                    <th>
+                                        @Html.ActionLink("Preço", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+                                    </th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width: 368px;">
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td style="width:100px;">
+                                        R$ @Html.DisplayFor(modelItem => item.Preco)
+                                    </td>
+                                    <td class="text-center" style="width: 200px;">
+                                        <a class='btn btn-success btn-xs' href="@Url.Action("Adicionar", new { IDProduto = item.IdProduto })">+ Carrinho</a>
+                                        <a class='btn btn-info btn-xs' href="@Url.Action("Detalhes", new {  id=item.IdProduto  })"><span class="glyphicon glyphicon-search"></span>Detalhes</a>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                    </td>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>

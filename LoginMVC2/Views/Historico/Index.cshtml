@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LoginMVC2.Models.ListaCompras>
+
+    @{
+        ViewBag.Title = "Histórico";
+    }
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+
+                <div class="form-group">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3">
+                                    <h2>Histórico de Compras</h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        @{
+                            double soma = 0.0;
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td colspan="3">
+                                            <h3>Compra realizada em @Html.DisplayFor(modelItem => item.DataCompra):</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th>Preço</th>
+                                    </tr>
+                                    foreach (var item2 in item.Items)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item2.Produtos.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item2.Quantidade)</td>
+                                            @{double preco = item2.Produtos.Preco * (double)item2.Quantidade;
+                                                <td>R$ @Html.DisplayFor(modelItem => preco) </td>
+                                                soma += preco;}
+                                        </tr>
+                                                    }
+                                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <br />
+                                        <p>Total gasto em compras no site: R$ @soma</p>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

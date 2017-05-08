@@ -1,0 +1,62 @@
+﻿@model LoginMVC2.Models.Produtos
+
+@{
+    ViewBag.Title = "Adicionar produtos";
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/crudfunc")
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h2>Adicionar produtos</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Nome)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Nome)
+                        @Html.ValidationMessageFor(model => model.Nome, String.Empty, new { @class = "error-message" })
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Preco)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Preco)
+                        @Html.ValidationMessageFor(model => model.Preco, String.Empty, new { @class = "error-message" })
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Quantidade)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Quantidade)
+                        @Html.ValidationMessageFor(model => model.Quantidade, String.Empty, new { @class = "error-message" })
+                    </div>
+                    <br />
+                    <p>
+                        <input class="btn btn-lg btn-success" type="submit" value="Adicionar" />
+                    </p>
+                </fieldset>
+            }
+            <br />
+            <br />
+
+            <div>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-primary" style="margin-left:45%;"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@using LoginMVC2.Models.Persistence;
+
+
+@helper RetornaQuantidadeCarrinho()
+{
+    int quantidade = new CarrinhoDAL().GetCount(new UsuariosDAL().GetUser(Context.ApplicationInstance.Context.User.Identity.Name).IDUsuario);
+    <div>(@quantidade)</div>
+}
+ 
