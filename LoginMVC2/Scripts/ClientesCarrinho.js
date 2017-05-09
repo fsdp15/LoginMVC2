@@ -60,7 +60,7 @@ $(modalaux).find(".modal-footer button").on("click", function () {
 $("table .btn.btn-success").off().on('click', function (event) {
     event.preventDefault();
     var modalcar = $("#myModal2");
-    $(modalcar).find(".modal-header h4").text("Detalhes");
+    $(modalcar).find(".modal-header h4").text("Checkout");
     if ($("#tableCarrinho >tbody >tr").length > 0) {
         $.ajax({
             dataType: "html",

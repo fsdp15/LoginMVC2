@@ -22,7 +22,6 @@ namespace LoginMVC2.Controllers
         public ProdutoDAL P { get => p; set => p = value; }
         public EnderecoDAL E { get => e; set => e = value; }
 
-
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.NomeCliente = HttpContext.User.Identity.Name;
@@ -53,23 +52,40 @@ namespace LoginMVC2.Controllers
             {
                 ViewBag.NameSortParm = "name_desc";
                 ViewBag.PriceSortParm = "price_desc";
+                var view = produtos.OrderBy(p => p.Nome).ToPagedList(pageNumber, 10);
+                if (view.Count == 0)
+                {
+                    return RedirectToAction("Home", "Erro");
+                }
                 return View(produtos.OrderBy(p => p.Nome).ToPagedList(pageNumber, 10));
             }
             else
             {
                 if (sortOrder.Equals("Price"))
                 {
-                    ViewBag.PriceSortParm = "price_desc";
+                    var view = ViewBag.PriceSortParm = "price_desc";
+                    if (view.Count == 0)
+                    {
+                        return RedirectToAction("Home", "Erro");
+                    }
                     return View(produtos.OrderBy(p => p.Preco).ToPagedList(pageNumber, 10));
                 }
                 else if (sortOrder.Equals("price_desc"))
                 {
-                    ViewBag.PriceSortParm = "Price";
+                    var view = ViewBag.PriceSortParm = "Price";
+                    if (view.Count == 0)
+                    {
+                        return RedirectToAction("Home", "Erro");
+                    }
                     return View(produtos.OrderByDescending(p => p.Preco).ToPagedList(pageNumber, 10));
                 }
                 else
                 {
-                    ViewBag.NameSortParm = "";
+                    var view = ViewBag.NameSortParm = "";
+                    if (view.Count == 0)
+                    {
+                        return RedirectToAction("Home", "Erro");
+                    }
                     return View(produtos.OrderByDescending(p => p.Nome).ToPagedList(pageNumber, 10));
                 }
             }
@@ -204,7 +220,7 @@ namespace LoginMVC2.Controllers
             var x = e.Complemento;
             var y = e.Endereco;
             var z = e.Estado;
- // valores da drop down list estão vindo zerados
+            // valores da drop down list estão vindo zerados
             if (ModelState.IsValid)
             {
                 e.Cliente = U.GetUser(HttpContext.User.Identity.Name).IDUsuario;

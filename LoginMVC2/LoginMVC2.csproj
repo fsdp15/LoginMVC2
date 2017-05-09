@@ -166,6 +166,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Error.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\OwinStartup.cs" />
     <Compile Include="Connected Services\WSCorreios\Reference.cs">
@@ -455,8 +456,10 @@
     <Content Include="Views\Clientes\Endereco.cshtml" />
     <Content Include="Views\Shared\DropDownCidades.cshtml" />
     <Content Include="Views\Historico\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ActionFilters\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Opcoes\" />
   </ItemGroup>

@@ -40,11 +40,19 @@ namespace LoginMVC2.Controllers
             if (String.IsNullOrEmpty(sortOrder))
             {
                 ViewBag.NameSortParm = "name_desc";
+                if (view.Count == 0)
+                {
+                    return RedirectToAction("Home", "Erro");
+                }
                 return View(produtos.OrderBy(p => p.Nome).ToPagedList(pageNumber, 10));
             }
             else
             {
                 ViewBag.NameSortParm = "";
+                if (view.Count == 0)
+                {
+                    return RedirectToAction("Home", "Erro");
+                }
                 return View(produtos.OrderByDescending(p => p.Nome).ToPagedList(pageNumber, 10));
             }
         }

@@ -66,7 +66,10 @@ namespace LoginMVC2.Controllers
             {
                 return View();
             }
-            else return RedirectToAction("Index", "Home");
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
