@@ -11,7 +11,7 @@ namespace LoginMVC2.Controllers
     {
         private ProdutoDAL ProdutoDAL = new ProdutoDAL();
         [Authorize(Roles = "Administrador, Funcionario")]
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? count)
         {
             ViewBag.NomeFuncionario = HttpContext.User.Identity.Name;
             ViewBag.Alerta = (string)TempData["alerta"];
@@ -28,6 +28,7 @@ namespace LoginMVC2.Controllers
 
             ViewBag.CurrentFilter = searchString;
             int pageNumber = (page ?? 1);
+            int pageCount = (count ?? 1);
 
             var produtos = from p in ProdutoDAL.Db.Produtos
                            select p;         
@@ -40,7 +41,7 @@ namespace LoginMVC2.Controllers
             if (String.IsNullOrEmpty(sortOrder))
             {
                 ViewBag.NameSortParm = "name_desc";
-                if (view.Count == 0)
+                if (page > pageCount)
                 {
                     return RedirectToAction("Home", "Erro");
                 }
@@ -49,7 +50,7 @@ namespace LoginMVC2.Controllers
             else
             {
                 ViewBag.NameSortParm = "";
-                if (view.Count == 0)
+                if (page > pageCount)
                 {
                     return RedirectToAction("Home", "Erro");
                 }

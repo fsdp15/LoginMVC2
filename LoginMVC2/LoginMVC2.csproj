@@ -457,6 +457,7 @@
     <Content Include="Views\Shared\DropDownCidades.cshtml" />
     <Content Include="Views\Historico\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Funcionarios\Relatorio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActionFilters\" />
