@@ -150,7 +150,7 @@ namespace LoginMVC2.Controllers
                 var credential = new NetworkCredential
                 {
                     UserName = "lojasfelipe@outlook.com.br",
-                    Password = "Jwoa0RGD"
+                   // Password = ""
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp.live.com";
